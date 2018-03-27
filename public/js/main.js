@@ -1,5 +1,4 @@
 'use strict';
-
 //Variable
 const submitButton = document.querySelector('button'),
 	  form = document.querySelector('form'),
@@ -343,17 +342,3 @@ submitButton.addEventListener('click', (e)=> {
 		}
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
