@@ -169,7 +169,7 @@ for( let i = 0; i < activities.children.length; i++ ) {
 			//Node.js Workshop
 			activities.children[i].style.color = 'gray';
 
-			// Disable Node Workshop
+			// Disable JavaScript Libraries Workshop
 			e.target.parentElement.previousElementSibling.previousElementSibling.firstChild.disabled = true;
 			e.target.parentElement.previousElementSibling.previousElementSibling.style.color = 'gray';
 
@@ -177,7 +177,7 @@ for( let i = 0; i < activities.children.length; i++ ) {
 		} else if( e.target.checked === false && e.target.name === 'node') {
 			activities.children[i].style.color = 'black';
 			
-			//Enable Node Workshop
+			//Enable JavaScript Libraries Workshop
 			e.target.parentElement.previousElementSibling.previousElementSibling.firstChild.disabled = false;
 			e.target.parentElement.previousElementSibling.previousElementSibling.style.color = 'black';
 
