@@ -132,13 +132,21 @@ for( let i = 0; i < activities.children.length; i++ ) {
 			e.target.parentElement.nextElementSibling.nextElementSibling.style.color = 'black';
 
 			total -= 100;
-		} else if( e.target.checked === true && e.target.name === 'js-libs') {
+		} else if( e.target.checked === true && e.target.name === 'js-libs') {    ///// RIGHT HERE!!
 			//JavaScript Libraries Workshop
 			activities.children[i].style.color = 'gray';
+
+			//Disable Node Workshop
+			e.target.parentElement.nextElementSibling.nextElementSibling.firstChild.disabled = true;
+			e.target.parentElement.nextElementSibling.nextElementSibling.style.color = 'gray';
 
 			total += 100;
 		} else if( e.target.checked === false && e.target.name === 'js-libs') {
 			activities.children[i].style.color = 'black';
+
+			//Enable Node Workshop
+			e.target.parentElement.nextElementSibling.nextElementSibling.firstChild.disabled = false;
+			e.target.parentElement.nextElementSibling.nextElementSibling.style.color = 'black';
 
 			total -= 100;
 		} else if( e.target.checked === true && e.target.name === 'express') {
@@ -161,17 +169,17 @@ for( let i = 0; i < activities.children.length; i++ ) {
 			//Node.js Workshop
 			activities.children[i].style.color = 'gray';
 
-			//Disable npm Workshop
-			e.target.parentElement.nextElementSibling.nextElementSibling.firstChild.disabled = true;
-			e.target.parentElement.nextElementSibling.nextElementSibling.style.color = 'gray';
+			// Disable Node Workshop
+			e.target.parentElement.previousElementSibling.previousElementSibling.firstChild.disabled = true;
+			e.target.parentElement.previousElementSibling.previousElementSibling.style.color = 'gray';
 
 			total += 100;	
 		} else if( e.target.checked === false && e.target.name === 'node') {
 			activities.children[i].style.color = 'black';
 			
-			//Enable npm Workshop
-			e.target.parentElement.nextElementSibling.nextElementSibling.firstChild.disabled = false;
-			e.target.parentElement.nextElementSibling.nextElementSibling.style.color = 'black';
+			//Enable Node Workshop
+			e.target.parentElement.previousElementSibling.previousElementSibling.firstChild.disabled = false;
+			e.target.parentElement.previousElementSibling.previousElementSibling.style.color = 'black';
 
 			total -= 100;
 		} else if( e.target.checked === true && e.target.name === 'build-tools') {
@@ -187,17 +195,10 @@ for( let i = 0; i < activities.children.length; i++ ) {
 			//npm Workshop 
 			activities.children[i].style.color = 'gray';
 
-			// Disable Node Workshop
-			e.target.parentElement.previousElementSibling.previousElementSibling.firstChild.disabled = true;
-			e.target.parentElement.previousElementSibling.previousElementSibling.style.color = 'gray';
 			total += 100;				
 		} else if( e.target.checked === false && e.target.name === 'npm' ) {
 			e.disabled = false;
 			activities.children[i].style.color = 'black';
-
-			//Enable Node Workshop
-			e.target.parentElement.previousElementSibling.previousElementSibling.firstChild.disabled = false;
-			e.target.parentElement.previousElementSibling.previousElementSibling.style.color = 'black';
 			
 			total -= 100;
 		}
