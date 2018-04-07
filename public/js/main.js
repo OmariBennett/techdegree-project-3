@@ -246,7 +246,6 @@ payment.addEventListener('change', ()=> {
 	}
 });
 
-
 //"Your job role" text field appears when user selects "Other" from the Job Role menu
 optionValue.addEventListener('input', ()=> {
 	if( optionValue.selectedIndex === 5 ) {
@@ -282,57 +281,59 @@ submitButton.addEventListener('click', (e)=> {
 	var test = emailInput.value.length === 0 && emailRegExp.test(emailInput.value);
 
 	//Form Validation
-	if( name.length === 0 ){
+	if( name.length === 0 || email.value.length === 0 || optionSelect.selectedIndex === 0 ||total === 0 || payment.selectedIndex === 0){
+		//Check if the name field is blank
 		console.log('invalid name');
 		nameTitle.style.color = 'red';
 		nameTitle.innerHTML = 'Name: (please provide your name)';
-		return
+		
+		//Check if email field is blank
+		console.log('NO Email address');
+		emailTitle.style.color = 'red';
+		emailTitle.innerHTML = 'Email: (please provide your email address)';
+
+		//Check if T-Shirt Info is checked
+		console.log('invalid shirt input');
+		tShirtWarning.style.color = 'red';
+		tShirtWarning.innerHTML = `Don't forget to pick a T-Shirt`;
+		tShirtTitle.append( tShirtWarning );
+
+		//Check if Activities is checked
+		console.log('invalid Activit!');
+		activitiesWarning.style.color = 'red';
+		activitiesWarning.innerHTML = `Please select an Activity`;
+		activities.children[0].append( activitiesWarning );
+
+		//Check if payment option
+		console.log('Please select a payment option!');
+		payment.previousElementSibling.style.color = 'red';
+		payment.previousElementSibling.innerHTML = 'Please select a payment option!';
+
+		
 	} else {
-		if( email.value.length === 0 ) {
-			console.log('NO Email address');
-			emailTitle.style.color = 'red';
-			emailTitle.innerHTML = 'Email: (please provide your email address)';
-		} else if ( emailInput.value.length > 0 && emailRegExp.test(emailInput.value) ) {
-			// console.log('valid email');
-			if( optionSelect.selectedIndex === 0 ) {
-				console.log('invalid shirt input');
-				tShirtWarning.style.color = 'red';
-				tShirtWarning.innerHTML = `Don't forget to pick a T-Shirt`;
-				tShirtTitle.append( tShirtWarning );
-			} else {
-				if( total === 0 ) {
-					console.log('invalid Activit!');
-					activitiesWarning.style.color = 'red';
-					activitiesWarning.innerHTML = `Please select an Activity`;
-					activities.children[0].append( activitiesWarning );
+		console.log('Hola');
+		if ( emailInput.value.length > 0 && emailRegExp.test(emailInput.value) ) {
+			if( payment.selectedIndex === 1) {
+				if( creditCardNum.length <= 12 || creditCardNum.length >= 17 ) {
+					console.log('invalid credit-card #');
+					creditCardInput.previousElementSibling.style.color = 'red';
+					creditCardInput.previousElementSibling.innerHTML = 'Card Number: invalid credit-card number!';
+				} else if ( zip.length !== 5 ) {
+					console.log('invalid zip');
+					zipInput.previousElementSibling.style.color = 'red';
+					zipInput.previousElementSibling.innerHTML = 'Zip Code: invalid!';
 
+				} else if ( cvvNum.length !== 3 ) {
+					console.log('invalid cvv #');
+					cvvIinput.previousElementSibling.style.color = 'red';
+					cvvIinput.previousElementSibling.innerHTML = 'CVV: invalid!';
 				} else {
-					if( payment.selectedIndex === 0 ) {
-						alert('Please select a payment option!');
-						return;
-					} else if( payment.selectedIndex === 1) {
-						if( creditCardNum.length <= 12 || creditCardNum.length >= 17 ) {
-							console.log('invalid credit-card #');
-							creditCardInput.previousElementSibling.style.color = 'red';
-							creditCardInput.previousElementSibling.innerHTML = 'Card Number: invalid credit-card number!';
-						} else if ( zip.length !== 5 ) {
-							console.log('invalid zip');
-							zipInput.previousElementSibling.style.color = 'red';
-							zipInput.previousElementSibling.innerHTML = 'Zip Code: invalid!';
-
-						} else if ( cvvNum.length !== 3 ) {
-							console.log('invalid cvv #');
-							cvvIinput.previousElementSibling.style.color = 'red';
-							cvvIinput.previousElementSibling.innerHTML = 'CVV: invalid!';
-						} else {
-							console.log('Validate form!');
-							location.reload(true);
-						}	
-					} else if( payment.selectedIndex === 2 ||  payment.selectedIndex === 3 ) {
 					console.log('Validate form!');
 					location.reload(true);
-					}
-				}
+				}	
+			} else if( payment.selectedIndex === 2 ||  payment.selectedIndex === 3 ) {
+			console.log('Validate form!');
+			location.reload(true);
 			}
 		} else {
 			console.log('invalid Email');
@@ -343,3 +344,89 @@ submitButton.addEventListener('click', (e)=> {
 		}
 	}
 });
+
+
+// //Validate the form field before submission
+// submitButton.addEventListener('click', (e)=> {
+// 	// Stop form submision
+// 	e.preventDefault();
+
+// 	//User input
+// 	const name = uppercase( nameInput.value ),
+// 		  email = emailInput,
+// 		  creditCardNum = creditCardInput.value,
+// 		  zip = zipInput.value,
+// 		  cvvNum = cvvIinput.value;
+
+// 		//Check if all the field is filled out
+// 			let nameTitle = nameInput.previousElementSibling,
+// 				emailTitle = emailInput.previousElementSibling,
+// 				tShirtTitle = designButton.parentElement.previousElementSibling.previousElementSibling,
+// 				activitieTitle = activities.children[0].firstChild,
+// 				paymentTitle = payment.previousElementSibling.previousElementSibling;
+
+// 	var emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+// 	var test = emailInput.value.length === 0 && emailRegExp.test(emailInput.value);
+
+// 	//Form Validation
+// 	if( name.length === 0 ){
+// 		console.log('invalid name');
+// 		nameTitle.style.color = 'red';
+// 		nameTitle.innerHTML = 'Name: (please provide your name)';
+// 		return
+// 	} else {
+// 		if( email.value.length === 0 ) {
+// 			console.log('NO Email address');
+// 			emailTitle.style.color = 'red';
+// 			emailTitle.innerHTML = 'Email: (please provide your email address)';
+// 		} else if ( emailInput.value.length > 0 && emailRegExp.test(emailInput.value) ) {
+// 			// console.log('valid email');
+// 			if( optionSelect.selectedIndex === 0 ) {
+// 				console.log('invalid shirt input');
+// 				tShirtWarning.style.color = 'red';
+// 				tShirtWarning.innerHTML = `Don't forget to pick a T-Shirt`;
+// 				tShirtTitle.append( tShirtWarning );
+// 			} else {
+// 				if( total === 0 ) {
+// 					console.log('invalid Activit!');
+// 					activitiesWarning.style.color = 'red';
+// 					activitiesWarning.innerHTML = `Please select an Activity`;
+// 					activities.children[0].append( activitiesWarning );
+
+// 				} else {
+// 					if( payment.selectedIndex === 0 ) {
+// 						alert('Please select a payment option!');
+// 						return;
+// 					} else if( payment.selectedIndex === 1) {
+// 						if( creditCardNum.length <= 12 || creditCardNum.length >= 17 ) {
+// 							console.log('invalid credit-card #');
+// 							creditCardInput.previousElementSibling.style.color = 'red';
+// 							creditCardInput.previousElementSibling.innerHTML = 'Card Number: invalid credit-card number!';
+// 						} else if ( zip.length !== 5 ) {
+// 							console.log('invalid zip');
+// 							zipInput.previousElementSibling.style.color = 'red';
+// 							zipInput.previousElementSibling.innerHTML = 'Zip Code: invalid!';
+
+// 						} else if ( cvvNum.length !== 3 ) {
+// 							console.log('invalid cvv #');
+// 							cvvIinput.previousElementSibling.style.color = 'red';
+// 							cvvIinput.previousElementSibling.innerHTML = 'CVV: invalid!';
+// 						} else {
+// 							console.log('Validate form!');
+// 							location.reload(true);
+// 						}	
+// 					} else if( payment.selectedIndex === 2 ||  payment.selectedIndex === 3 ) {
+// 					console.log('Validate form!');
+// 					location.reload(true);
+// 					}
+// 				}
+// 			}
+// 		} else {
+// 			console.log('invalid Email');
+// 			emailTitle.style.color = 'red';
+// 			// emailTitle.innerHTML = 'Email: (please provide your email address)';
+// 			emailTitle.innerHTML = 'Email: (email address is formatted incorrectly!)';
+// 			return
+// 		}
+// 	}
+// });
